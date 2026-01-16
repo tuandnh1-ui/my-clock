@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.2">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1">&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1">&lt;title&gt;Real-time Clock&lt;/title&gt;</p>
+<p class="p1">&lt;style&gt;</p>
+<p class="p1">body {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>justify-content: center;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>height: 100vh;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>background: #f0f0f0;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.clock {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>width: 300px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>height: 300px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>border: 8px solid black;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>border-radius: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>position: relative;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>background: white;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.center {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>width: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>height: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>background: black;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>border-radius: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>top: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>left: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>transform: translate(-50%, -50%);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>z-index: 10;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.hand {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>bottom: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>left: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>transform-origin: bottom;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>transform: translateX(-50%) rotate(0deg);</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.hour {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>width: 6px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>height: 70px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>background: black;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.minute {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>width: 4px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>height: 100px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>background: black;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.second {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>width: 2px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>height: 120px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>background: red;</p>
+<p class="p1">}</p>
+<p class="p1">&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;div class="clock"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="hand hour" id="hour"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="hand minute" id="minute"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="hand second" id="second"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="center"&gt;&lt;/div&gt;</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;script&gt;</p>
+<p class="p1">function updateClock() {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const now = new Date();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const seconds = now.getSeconds();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const minutes = now.getMinutes();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const hours = now.getHours();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const secDeg = seconds * 6; // 360/60</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const minDeg = minutes * 6 + seconds * 0.1;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const hourDeg = (hours % 12) * 30 + minutes * 0.5;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById("second").style.transform =</p>
+<p class="p1"><span class="Apple-converted-space">    </span>`translateX(-50%) rotate(${secDeg}deg)`;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById("minute").style.transform =</p>
+<p class="p1"><span class="Apple-converted-space">    </span>`translateX(-50%) rotate(${minDeg}deg)`;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById("hour").style.transform =</p>
+<p class="p1"><span class="Apple-converted-space">    </span>`translateX(-50%) rotate(${hourDeg}deg)`;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">setInterval(updateClock, 1000);</p>
+<p class="p1">updateClock();</p>
+<p class="p1">&lt;/script&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
